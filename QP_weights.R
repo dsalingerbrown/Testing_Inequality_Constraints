@@ -9,7 +9,7 @@ library(MASS)
 #' @param omega Matrix. The covariance matrix of the constraints.
 #' @param draws Integer. Number of Monte Carlo simulations (default 500).
 #' @return A vector containing the estimated weights.
-simulate_weights <- function(omega, draws = 500) {
+simulate_weights <- function(omega, draws = 1000) {
   
   P <- ncol(omega)
   omega_inv <- solve(omega) 
@@ -93,7 +93,7 @@ dummy_omega <- matrix(c(1.0, 0.5, 0.2,
 
 # 2. Simulate the Weights
 cat("Simulating weights...\n")
-estimated_weights <- simulate_weights(dummy_omega, draws = 500)
+estimated_weights <- simulate_weights(dummy_omega, draws = 1000)
 
 # 3. Provide an Observed Test Statistic 
 # (In a real scenario, you calculate this using your actual data. 
@@ -106,3 +106,4 @@ final_p_value <- calculate_p_value(test_stat = dummy_test_stat, weights = estima
 cat("\n--- Final Results ---\n")
 cat("Observed Test Statistic:", dummy_test_stat, "\n")
 cat("Calculated P-Value:     ", round(final_p_value, 4), "\n")
+
